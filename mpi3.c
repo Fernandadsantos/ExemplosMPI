@@ -30,10 +30,12 @@ int main(void) {
       
       for (int q = 1; q < comm_size; q++) {
          /* Recepção da mensagem do processo q */
+         /* MPI_ANY_SOURCE -> enquanto nao chega msg fica bloqueado, quando alguma msg chegar ele captura e imprime*/
+         
          MPI_Recv(message, MAX_STRING, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       
-         /* Impressão da mensagem do processo q */
-         printf("O processo %d recebeu a seguinte mensagem: %s\n", my_rank, message);
+         printf("O processo %d recebeu a seguinte mensagem: %s (status.MPI_SOURCE: %d status.MPI_TAG: %d)\n", my_rank, message, status.MPI_SOURCE, status.MPI_TAG);
+
       } 
    }
 
